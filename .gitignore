@@ -1,0 +1,4 @@
+# Mac ds store files
+*.DS_Store
+/.DS_Store
+.DS_Store
