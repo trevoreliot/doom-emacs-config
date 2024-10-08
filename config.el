@@ -76,3 +76,9 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+(setq initial-frame-alist
+      (append initial-frame-alist
+              '((left   . 50)
+                (top    . 10)
+                (width  . 150)
+                (height . 200))))
