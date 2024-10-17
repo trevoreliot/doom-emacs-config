@@ -42,8 +42,14 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
+;; Org Mode Settings
+(after! org
+  (map! :map org-mode-map
+        :n "M-j" #'org-metadown
+        :n "M-k" #'org-metaup)
+  )
 ;; Projectile - Recursive discovery locations for startup
-(setq projectile-project-search-path '("~/Documents/"))
+(setq projectile-project-search-path '("~/Documents/Git_Repos")):
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -81,4 +87,20 @@
               '((left   . 50)
                 (top    . 10)
                 (width  . 150)
-                (height . 200))))
+                (height . 200)))
+      )
+
+;; Conda Setup
+(require 'conda)
+;; if you want interactive shell support, include:
+(conda-env-initialize-interactive-shells)
+;; if you want eshell support, include:
+(conda-env-initialize-eshell)
+;; if you want auto-activation (see below for details), include:
+(conda-env-autoactivate-mode t)
+;; if you want to automatically activate a conda environment on the opening of a file:
+(add-hook 'find-file-hook (lambda () (when (bound-and-true-p conda-project-env-path)
+                                          (conda-env-activate-for-buffer)))
+          )
+(custom-set-variables
+ '(conda-anaconda-home "/opt/homebrew/Caskroom/miniforge/base"))
